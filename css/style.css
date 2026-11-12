@@ -198,7 +198,8 @@ form .btn.big { width: 100%; }
 @keyframes fade { from { opacity: .8; } to { opacity: 0; } }
 
 .dh-main { position: relative; padding: 0; }
-.dh-main canvas { position: absolute; inset: 0; display: block; }
+.dh-main { overflow: hidden; }
+.dh-main canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; } /* feste Groesse, sonst waechst die Zeichenflaeche bei Windows-Skalierung */
 .dh-layer { position: absolute; inset: 0; z-index: 2; padding: 14px 20px; overflow: auto; }
 .dh[data-ph="count"] .dh-layer, .dh[data-ph="run"] .dh-layer, .dh[data-ph="burst"] .dh-layer { pointer-events: none; }
 .dh[data-ph="lobby"] .dh-layer { background: var(--bg); }
