@@ -4,7 +4,7 @@
 //   …/?room=ABCD       → Teilnehmende
 //   …/                 → Startbildschirm
 import { connect } from './net.js';
-import { esc } from './fx.js';
+import { esc, aip } from './fx.js';
 
 const app = document.getElementById('app');
 const q = new URLSearchParams(location.search);
@@ -12,8 +12,8 @@ const q = new URLSearchParams(location.search);
 function startScreen(msg = '') {
   app.innerHTML = `
     <div class="center"><div class="card">
-      <h1 class="logo">UNTER <span>DRUCK</span></h1>
-      <p class="sub">Das Ventil-Teamspiel</p>
+      ${aip('xl')}
+      <p class="sub">Workshop-Spiele: Unter Druck · Membran-Duell</p>
       ${msg ? `<p class="err">${esc(msg)}</p>` : ''}
       <form id="f">
         <label>Raumcode<input id="code" maxlength="4" autocomplete="off" placeholder="ABCD" autofocus></label>

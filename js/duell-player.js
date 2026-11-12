@@ -1,7 +1,7 @@
 // Membran-Duell – Ansicht der Teilnehmenden: eine grosse Handpumpe.
 import { D, strength } from './duell-sim.js';
 import { createView } from './duell-view.js';
-import { TEAMS, fmtTime, esc, beep, sfx, soundOn, toggleSound, confetti } from './fx.js';
+import { aip, TEAMS, fmtTime, esc, beep, sfx, soundOn, toggleSound, confetti } from './fx.js';
 
 
 // Animierte Kurzanleitung (4 Karten, laeuft in Schleife)
@@ -51,6 +51,7 @@ export async function startDuellPlayer(db, code, app, startScreen) {
       <div class="p-round" id="dRound"></div>
       <div class="d-wins" id="dWins"></div>
       <div class="p-timer" id="dTimer"></div>
+      ${aip()}
       <button class="btn ghost" id="dSnd"></button>
     </header>
     <div class="d-arena"><canvas id="dArena"></canvas></div>
@@ -85,7 +86,7 @@ export async function startDuellPlayer(db, code, app, startScreen) {
   else {
     let saved = '';
     try { saved = localStorage.getItem('ud-name') || ''; } catch { /* egal */ }
-    ov.innerHTML = `<div class="card"><h1 class="logo">MEMBRAN-<span>DUELL</span></h1><p class="sub">Raum ${esc(code)}</p>
+    ov.innerHTML = `<div class="card">${aip('xl')}<h1 class="logo">MEMBRAN-<span>DUELL</span></h1><p class="sub">Raum ${esc(code)}</p>
       <form id="jf"><label>Dein Name<input id="jn" maxlength="20" autocomplete="off" value="${esc(saved)}" autofocus></label>
       <button class="btn big">Beitreten</button></form></div>`;
     ov.querySelector('#jf').onsubmit = (e) => {

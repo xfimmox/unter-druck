@@ -1,7 +1,10 @@
 // Unter Druck – kleine Effekte: Toene, Konfetti, HTML-Helfer.
 
+// Workshop-Wortmarke „AI @ Pressure“. size: '' (Kopfzeile), 'xl' (gross mit Druckskala)
+export const aip = (size = '') => `<div class="aip ${size}" aria-label="AI @ Pressure"><span class="aip-ai">AI</span><span class="aip-at"><i></i><i></i><b>@</b></span><span class="aip-pr">Pressure</span>${size === 'xl' ? '<span class="aip-bar"><i></i></span>' : ''}</div>`;
+
 export const TEAMS = [
-  { name: 'Blau', side: 'linke', color: '#2f8fff' },
+  { name: 'Blau', side: 'linke', color: '#3d8fe0' },
   { name: 'Orange', side: 'rechte', color: '#ff8a1f' },
 ];
 export const fmtTime = (s) => `${Math.floor(s / 60)}:${String(Math.max(0, Math.floor(s % 60))).padStart(2, '0')}`;

@@ -1,6 +1,6 @@
 // Unter Druck – Ansicht der Teilnehmenden: eigenes Manometer + eigenes Ventil.
 import { CFG } from './sim.js';
-import { TEAMS, fmtTime, esc, sfx, soundOn, toggleSound, confetti } from './fx.js';
+import { aip, TEAMS, fmtTime, esc, sfx, soundOn, toggleSound, confetti } from './fx.js';
 
 const clamp = (x, a, b) => (x < a ? a : x > b ? b : x);
 
@@ -20,6 +20,7 @@ export async function startPlayer(db, code, app, startScreen) {
       <div class="p-round" id="pRound"></div>
       <div class="p-timer" id="pTimer"></div>
       <div class="p-score" id="pScore"></div>
+      ${aip()}
       <button class="btn ghost" id="pSnd" title="Ton an/aus"></button>
     </header>
     <main class="p-main">
@@ -55,7 +56,7 @@ export async function startPlayer(db, code, app, startScreen) {
   else {
     let saved = '';
     try { saved = localStorage.getItem('ud-name') || ''; } catch { /* egal */ }
-    ov.innerHTML = `<div class="card"><h1 class="logo">UNTER <span>DRUCK</span></h1>
+    ov.innerHTML = `<div class="card">${aip('xl')}<h1 class="logo">UNTER <span>DRUCK</span></h1>
       <p class="sub">Raum ${esc(code)}</p>
       <form id="jf"><label>Dein Name<input id="jn" maxlength="20" autocomplete="off" value="${esc(saved)}" autofocus></label>
       <button class="btn big">Beitreten</button></form></div>`;

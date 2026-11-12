@@ -8,8 +8,8 @@
 import { D, EVENTS } from './duell-sim.js';
 import { TEAMS, beep } from './fx.js';
 
-const COL = ['#2f8fff', '#ff8a1f'];
-const COL2 = ['#0b4fae', '#b04f00'];
+const COL = ['#3d8fe0', '#ff8a1f'];
+const COL2 = ['#0a3d8f', '#b04f00'];
 const clamp = (x, a, b) => (x < a ? a : x > b ? b : x);
 const FONT = 'system-ui, "Segoe UI", sans-serif';
 
@@ -212,7 +212,7 @@ export function createView(cv, opts = {}) {
     for (const sx of [-1, 1]) for (const yy of [T - m / 2, B + m / 2]) { g.beginPath(); g.arc(cx + sx * 16 * S, yy, 5 * S, 0, 7); g.fill(); }
     g.save();
     g.beginPath(); g.roundRect(L.L, T, vw, vh, r); g.clip();
-    g.fillStyle = '#0c0f13'; g.fillRect(L.L, T, vw, vh);
+    g.fillStyle = '#001233'; g.fillRect(L.L, T, vw, vh);
     const maxB = vw / 2 - 18 * S;
     const wob = (Math.sin(now * 37) * Math.min(6, Math.min(P[0], P[1]) * 6) + Math.sin(now * 11) * 1.5) * S;
     const c = cx + (xs * maxB + wob) * 2;

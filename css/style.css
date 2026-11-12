@@ -257,3 +257,74 @@ form .btn.big { width: 100%; }
 
 /* gesperrte Knoepfe deutlich grau */
 .btn:disabled, .btn.big:disabled { background: #2b333b; color: #7d8b96; border-color: #3a444e; opacity: 1; }
+
+/* ================= WIKA-Design + „AI @ Pressure" ================= */
+:root {
+  --navy: #002565; --wblue: #3480cf;
+  --bg: #001a4a; --panel: #062b6b; --panel2: #0c3780; --line: #24508f;
+  --text: #ffffff; --muted: #a8bddc;
+  --blue: #3d8fe0; --orange: #ff8a1f;
+}
+body { background: radial-gradient(1200px 700px at 50% -10%, #0a3a86 0%, #001a4a 60%) fixed, #001a4a; font-family: Arial, Helvetica, sans-serif; }
+h1, h2, .logo, .h-round, .p-team, .btn { font-family: Arial, Helvetica, sans-serif; }
+.card { background: #ffffff; color: #1a1a1a; border: 0; border-radius: 6px; box-shadow: 0 24px 60px rgba(0,10,40,.5); }
+.card .sub, .card .small, .card label { color: #5b6b80; }
+.card a { color: var(--wblue); }
+.card input { background: #f7f7f7; color: #002565; border: 1px solid #c6c6c6; }
+.card input:focus { outline-color: var(--wblue); }
+.logo { background: none; -webkit-text-fill-color: currentColor; color: var(--navy); letter-spacing: .08em; font-size: 26px; }
+.logo span { color: var(--wblue); -webkit-text-fill-color: var(--wblue); }
+.btn { border-radius: 999px; background: #ffffff; color: var(--navy); border: 1px solid #c6c6c6; font-weight: 700; }
+.btn.big { background: var(--navy); color: #fff; border-color: var(--navy); }
+.btn.ghost { background: transparent; color: var(--navy); border-color: #c6c6c6; }
+.btn.steel { background: #fff; color: var(--navy); }
+.btn:disabled, .btn.big:disabled { background: #e9e9e9; color: #8a94a3; border-color: #d5d5d5; }
+/* Kopf- und Fusszeilen weiss wie auf wika.com */
+.p-head, .h-head, .h-ctl { background: #ffffff; color: var(--navy); border-color: #e1e5eb; }
+.h-head { border-bottom: 4px solid var(--wblue); }
+.h-round, .h-timer, .p-timer, .h-room b { color: var(--navy); }
+.h-room, .h-warn, .p-round { color: #5b6b80; }
+.h-warn small { color: #8a94a3; }
+.dh-chk { color: var(--navy); }
+.p-wrap[data-team=""] .p-team, .d-wrap[data-team=""] .p-team { color: var(--navy); }
+.d-wins span { color: #8a94a3; }
+/* Overlay-Karten weiss, Text dunkel */
+.ovc { color: #1a1a1a; } .ovc p, .ovc .where { color: #3c4a5c; } .ovc .where b, .ovc .rule b { color: var(--navy); }
+.ovc .rule { border-top-color: #e1e5eb; color: #5b6b80; }
+.ovc h2 { color: var(--navy); }
+.hw-card { background: #f4f6f9; border-color: #e1e5eb; } .hw-card span { color: #5b6b80; } .hw-card em { color: var(--navy); }
+.hw-key { fill: #ffffff; } .hw-ring0 { stroke: #d5dbe3; }
+.p-overlay { background: rgba(0,20,60,.82); }
+.dh-card, .dh-intro { background: rgba(255,255,255,.97); color: #1a1a1a; border: 0; border-radius: 6px; }
+.dh-card h2, .dh-intro h2, .h-people h2 { color: var(--navy); }
+.dh-intro .rules, .dh-intro p { color: #3c4a5c; } .dh-intro .rules b { color: var(--navy); }
+.dh-tab td { border-bottom-color: #e9edf3; } .dh-tab th { color: #5b6b80; border-bottom-color: #c6c6c6; }
+.dh-final .mvp { color: #5b6b80; } .dh-final .mvp b { color: var(--navy); }
+.dh[data-ph="lobby"] .dh-layer { background: transparent; }
+.chip { background: #f4f6f9; color: var(--navy); border-color: #e1e5eb; }
+.h-lobby .h-people { background: #ffffff; color: #1a1a1a; border-radius: 6px; padding: 22px 26px; }
+.h-lobby .h-people .small { color: #5b6b80; }
+.h-lobby .h-join p, .h-link { color: #ffffff; }
+.dh-lobby.dh-card, .h-lobby.dh-card { background: transparent; }
+.h-mid h2, .h-mid p { color: #ffffff; }
+.h-rhead { color: #ffffff; }
+
+/* ---- Wortmarke AI @ Pressure ---- */
+.aip { display: inline-flex; align-items: center; gap: .18em; font: 900 22px/1 Arial, Helvetica, sans-serif; color: var(--navy); white-space: nowrap; position: relative; }
+.aip-pr { background: linear-gradient(100deg, var(--navy) 0 40%, var(--wblue) 50%, var(--navy) 60% 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: aipShine 4s linear infinite; }
+.aip-at { position: relative; display: inline-grid; place-items: center; width: 1.25em; height: 1.25em; color: #fff; }
+.aip-at b { position: relative; z-index: 1; display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: var(--wblue); font-size: .8em; box-shadow: 0 0 0 2px rgba(52,128,207,.25); }
+.aip-at i { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--wblue); animation: aipWave 2.2s ease-out infinite; }
+.aip-at i + i { animation-delay: 1.1s; }
+@keyframes aipWave { from { transform: scale(1); opacity: .9; } to { transform: scale(2.3); opacity: 0; } }
+@keyframes aipShine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+.aip.xl { display: inline-grid; grid-template-columns: auto auto auto; column-gap: .22em; font-size: 54px; margin: 6px 0 14px; }
+.aip.xl .aip-bar { grid-column: 1 / -1; height: 8px; margin-top: 12px; border-radius: 4px; background: #e1e5eb; overflow: hidden; }
+.aip.xl .aip-bar i { display: block; height: 100%; width: 100%; transform-origin: left; background: linear-gradient(90deg, #2ecc71 0 55%, #f5c211 55% 80%, #e5383b 80%); animation: aipBar 3.2s ease-in-out infinite; }
+@keyframes aipBar { 0% { transform: scaleX(.05); } 60% { transform: scaleX(1); } 70% { transform: scaleX(.93); } 78% { transform: scaleX(1); } 100% { transform: scaleX(.05); } }
+.h-people .aip.xl { font-size: 46px; }
+.h-head .aip, .p-head .aip { font-size: 19px; margin-left: auto; }
+.h-head .h-round { flex: 0 1 auto; }
+@media (max-width: 900px) { .p-head .aip { display: none; } .aip.xl { font-size: 38px; } }
+@media (prefers-reduced-motion: reduce) { .aip *, .aip-pr { animation: none !important; } }
+@media (max-width: 1150px) { .h-warn { font-size: 0; } .h-warn small { font-size: 10px; } }

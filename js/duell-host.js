@@ -1,7 +1,7 @@
 // Membran-Duell – Moderator/Beamer: Ablauf und Spiellogik. Gezeichnet wird mit duell-view.js.
 import { D, EVENTS, makeRound, stepRound, addStroke, strength, botNext, rng } from './duell-sim.js';
 import { createView } from './duell-view.js';
-import { TEAMS, esc, sfx, soundOn, toggleSound, confetti } from './fx.js';
+import { aip, TEAMS, esc, sfx, soundOn, toggleSound, confetti } from './fx.js';
 
 const BOT_NAMES = ['Pascal', 'Bernoulli', 'Torricelli', 'Boyle', 'Bourdon', 'Mariotte', 'Venturi', 'Reynolds', 'Newton', 'Kelvin',
   'Celsius', 'Watt', 'Joule', 'Hooke', 'Euler', 'Darcy', 'Stokes', 'Prandtl', 'Mach', 'Carnot'];
@@ -37,6 +37,7 @@ export async function startDuellHost(db, app) {
   <div class="h-wrap dh" id="hw">
     <header class="h-head">
       <h1 class="logo sm">MEMBRAN-<span>DUELL</span></h1>
+      ${aip()}
       <div class="h-round" id="hRound"></div>
       <div class="d-wins big" id="hWins"></div>
       <div class="h-timer" id="hTimer"></div>
@@ -234,7 +235,7 @@ export async function startDuellHost(db, app) {
     if (ph === 'lobby') {
       const P = Object.values(people());
       h = `<div class="h-lobby dh-card"><div class="h-join"><div id="qr"></div><div class="h-link">${esc(joinUrl)}</div><p>Link öffnen oder QR-Code scannen – Raumcode <b>${code}</b></p></div>
-        <div class="h-people"><h2>Schon dabei: ${P.length}</h2><div class="chips">${P.map((p) => `<span class="chip${p.bot ? ' bot' : ''}">${esc(p.name)}</span>`).join('') || '<span class="small">Noch niemand – Link öffnen und Namen eingeben.</span>'}</div>
+        <div class="h-people">${aip('xl')}<h2>Schon dabei: ${P.length}</h2><div class="chips">${P.map((p) => `<span class="chip${p.bot ? ' bot' : ''}">${esc(p.name)}</span>`).join('') || '<span class="small">Noch niemand – Link öffnen und Namen eingeben.</span>'}</div>
         <p class="small">Allein testen? <button class="btn ghost" id="cBots20">2 × 10 Bots hinzufügen</button></p></div></div>`;
     } else if (ph === 'teams') {
       h = `<div class="dh-intro"><h2>Die Teams stehen!</h2><p><b class="c0">Team Blau</b> nach <b>links</b>, <b class="c1">Team Orange</b> nach <b>rechts</b>.</p>

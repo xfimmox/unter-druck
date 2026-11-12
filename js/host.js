@@ -1,6 +1,6 @@
 // Unter Druck – Moderator/Beamer: rechnet die Simulation und steuert den Ablauf.
 import { CFG, ROUNDS, EVENT_INFO, makeSchedule, makeTeam, step, status, affected, stationOf, autoStep, botStep, rng } from './sim.js';
-import { TEAMS, fmtTime, esc, sfx, soundOn, toggleSound, confetti } from './fx.js';
+import { aip, TEAMS, fmtTime, esc, sfx, soundOn, toggleSound, confetti } from './fx.js';
 
 const BOT_NAMES = ['Pascal', 'Bernoulli', 'Torricelli', 'Boyle', 'Bourdon', 'Mariotte', 'Venturi', 'Reynolds', 'Newton', 'Kelvin',
   'Celsius', 'Watt', 'Joule', 'Hooke', 'Euler', 'Darcy', 'Stokes', 'Prandtl', 'Mach', 'Carnot'];
@@ -35,6 +35,7 @@ export async function startHost(db, app) {
   <div class="h-wrap" id="hw">
     <header class="h-head">
       <h1 class="logo sm">UNTER <span>DRUCK</span></h1>
+      ${aip()}
       <div class="h-round" id="hRound"></div>
       <div class="h-timer" id="hTimer"></div>
       <div class="h-room">Raum <b>${code}</b></div>
@@ -236,7 +237,7 @@ export async function startHost(db, app) {
     if (ph === 'lobby') {
       main.innerHTML = `<div class="h-lobby">
         <div class="h-join"><div id="qr"></div><div class="h-link">${esc(joinUrl)}</div><p>Link öffnen oder QR-Code scannen – Raumcode <b>${code}</b></p></div>
-        <div class="h-people"><h2>Schon dabei: <span id="hCount">0</span></h2><div class="chips" id="hChips"></div>
+        <div class="h-people">${aip('xl')}<h2>Schon dabei: <span id="hCount">0</span></h2><div class="chips" id="hChips"></div>
         <p class="small">Allein testen? <button class="btn ghost" id="cBots20">2 × 10 Bots hinzufügen</button></p></div></div>`;
       if (window.QRCode) { try { new window.QRCode($('qr'), { text: joinUrl, width: 280, height: 280 }); } catch { /* nur Link */ } }
       $('cBots20').onclick = () => addBots(20);
