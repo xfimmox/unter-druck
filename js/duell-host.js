@@ -223,7 +223,8 @@ export async function startDuellHost(db, app) {
     $('hRound').textContent = ph === 'lobby' ? 'Lobby' : ph === 'teams' ? 'Teams' : ph === 'final' ? 'Siegerehrung' : label();
     const nx = $('cNext');
     const decided = G.wins[0] >= 2 || G.wins[1] >= 2;
-    nx.textContent = ph === 'lobby' ? 'Teams auslosen' : ph === 'teams' ? 'Runde 1 starten' : ph === 'run' ? 'Runde beenden' : ph === 'result' ? (decided ? 'Zur Siegerehrung' : `${roundName()} starten`) : ph === 'final' ? 'Fertig' : '…';
+    const few = Object.keys(people()).length < 2;
+    nx.textContent = ph === 'lobby' ? (few ? 'Teams auslosen (mind. 2 Personen)' : 'Teams auslosen') : ph === 'teams' ? 'Runde 1 starten' : ph === 'run' ? 'Runde beenden' : ph === 'result' ? (decided ? 'Zur Siegerehrung' : `${roundName()} starten`) : ph === 'final' ? 'Fertig' : '…';
     nx.disabled = (ph === 'lobby' && Object.keys(people()).length < 2) || ph === 'count' || ph === 'burst' || ph === 'final';
     nx.classList.toggle('big', ph !== 'run'); nx.classList.toggle('ghost', ph === 'run');
     $('cPause').hidden = ph !== 'run';

@@ -253,3 +253,6 @@ form .btn.big { width: 100%; }
 .hw-flash { fill: #fff; opacity: 0; animation: hwflash 3s infinite; pointer-events: none; }
 @keyframes hwflash { 0%, 69% { opacity: 0; } 71% { opacity: .85; } 80%, 100% { opacity: 0; } }
 @media (max-width: 760px) { .howto { grid-template-columns: repeat(2, 1fr); } }
+
+/* gesperrte Knoepfe deutlich grau */
+.btn:disabled, .btn.big:disabled { background: #2b333b; color: #7d8b96; border-color: #3a444e; opacity: 1; }

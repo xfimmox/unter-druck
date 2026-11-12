@@ -278,6 +278,7 @@ export async function startHost(db, app) {
     $('hCount').textContent = P.length;
     $('hChips').innerHTML = P.map((p) => `<span class="chip${p.bot ? ' bot' : ''}">${esc(p.name)}</span>`).join('') || '<span class="small">Noch niemand – Link öffnen und Namen eingeben.</span>';
     $('cNext').disabled = P.length < 2;
+    $('cNext').textContent = P.length < 2 ? 'Teams auslosen (mind. 2 Personen)' : 'Teams auslosen';
   }
   let tickSig = '';
   function updateLive(sc) {
