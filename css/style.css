@@ -160,3 +160,96 @@ form .btn.big { width: 100%; }
   .p-gauge { grid-column: 1 / -1; height: 42vh; } .p-valve { grid-column: 1 / -1; }
   .h-lobby { grid-template-columns: 1fr; }
 }
+
+/* ---------- Membran-Duell ---------- */
+.d-wins { font-size: 20px; letter-spacing: .1em; } .d-wins span { color: var(--muted); }
+.d-wins.big { font-size: 26px; }
+.d-wrap { height: 100%; display: flex; flex-direction: column; position: relative; --team: var(--muted); }
+.d-wrap[data-team="0"] { --team: var(--blue); } .d-wrap[data-team="1"] { --team: var(--orange); }
+.d-wrap .p-head { border-bottom-color: var(--team); }
+.d-tug { position: relative; height: 22px; margin: 10px 18px 0; border-radius: 11px; overflow: hidden; display: flex; border: 2px solid var(--line); }
+.d-tug-b { flex: 1; background: linear-gradient(90deg, #0b4fae, var(--blue)); } .d-tug-o { flex: 1; background: linear-gradient(90deg, var(--orange), #b04f00); }
+.d-tug-mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,.5); }
+.d-tug-m { position: absolute; top: -2px; bottom: -2px; width: 10px; margin-left: -5px; background: #fff; border-radius: 5px; box-shadow: 0 0 10px #fff; }
+.d-main { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 8px 16px 24px; }
+.d-combo { height: 54px; font: 900 44px system-ui, "Segoe UI", sans-serif; color: var(--team); text-shadow: 0 3px 0 #0d1014; }
+.d-combo[data-m="2"] { color: #fff35c; animation: pulse .35s infinite alternate; }
+@keyframes pulse { to { transform: scale(1.12); } }
+.d-pump { background: none; border: 0; padding: 0; cursor: pointer; width: min(46vh, 80vw); height: min(46vh, 80vw); touch-action: none; outline: none; }
+.d-pump svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 12px 18px rgba(0,0,0,.55)); }
+.d-pump.hit svg { animation: thump .18s; }
+@keyframes thump { 40% { transform: scale(.96) translateY(4px); } }
+.d-ring { fill: none; stroke: #f5c211; stroke-width: 7; transform: rotate(-90deg); transform-origin: 100px 150px; opacity: .8; }
+.d-ring[data-full="1"] { stroke: var(--green); filter: drop-shadow(0 0 6px var(--green)); }
+.d-grip { fill: var(--team); stroke: rgba(0,0,0,.4); stroke-width: 2; }
+.d-band { fill: var(--team); }
+.d-fb { font-size: 22px; font-weight: 700; min-height: 32px; color: var(--muted); }
+.d-fb[data-k="ok"] { color: var(--green); } .d-fb[data-k="bad"] { color: var(--red); } .d-fb[data-k="mid"] { color: var(--yellow); }
+.d-help { color: var(--muted); font-size: 14px; text-align: center; max-width: 560px; } .d-help b { color: var(--text); }
+.d-drop { position: fixed; z-index: 30; width: 9px; height: 9px; border-radius: 50%; background: var(--team, #2f8fff); pointer-events: none; animation: drop .7s ease-out forwards; }
+.d-wrap[data-team="1"] ~ .d-drop, body .d-drop { background: #9fd0ff; }
+@keyframes drop { to { transform: translate(var(--dx), var(--dy)); opacity: 0; } }
+.d-banner { position: absolute; left: 0; right: 0; top: 40%; z-index: 8; text-align: center; font: 900 64px system-ui, "Segoe UI", sans-serif; color: #ffd23f; background: rgba(0,0,0,.7); padding: 14px; animation: pop .3s; text-shadow: 0 4px 0 #000; }
+.d-banner[data-t="leak"] { color: #ff5a5d; } .d-banner[data-t="stoss"] { color: #fff; }
+.d-banner small { display: block; font-size: 20px; font-weight: 600; color: var(--text); text-shadow: none; }
+@keyframes pop { from { transform: scale(.4); opacity: 0; } }
+.d-wrap.flash::after { content: ''; position: absolute; inset: 0; z-index: 20; background: var(--team); animation: fade .9s forwards; pointer-events: none; }
+.d-wrap.crack { animation: shake .3s 3; }
+@keyframes fade { from { opacity: .8; } to { opacity: 0; } }
+
+.dh-main { position: relative; padding: 0; }
+.dh-main canvas { position: absolute; inset: 0; display: block; }
+.dh-layer { position: absolute; inset: 0; z-index: 2; padding: 14px 20px; overflow: auto; }
+.dh[data-ph="count"] .dh-layer, .dh[data-ph="run"] .dh-layer, .dh[data-ph="burst"] .dh-layer { pointer-events: none; }
+.dh[data-ph="lobby"] .dh-layer { background: var(--bg); }
+.dh-card { background: rgba(20,24,29,.93); border: 1px solid var(--line); border-radius: 14px; padding: 18px 24px; }
+.dh-lobby, .h-lobby.dh-card { height: 100%; }
+.dh-intro { position: absolute; left: 50%; top: 10px; transform: translateX(-50%); width: min(720px, 92%); background: rgba(20,24,29,.93); border: 1px solid var(--line); border-radius: 14px; padding: 10px 24px; text-align: center; }
+.dh-intro h2 { margin: 4px 0; font-size: 30px; } .dh-intro p { margin: 4px 0; font-size: 18px; }
+.dh-intro .rules { margin: 8px 0; font-size: 16px; }
+.dh-res, .dh-final { max-width: 980px; margin: 0 auto; text-align: center; }
+.dh-res h2 { font-size: 36px; margin: 6px 0 16px; }
+.dh-final .cup { font-size: 60px; margin: 0; } .dh-final h2 { font-size: 52px; margin: 0; }
+.dh-final .h-fscore { font-size: 70px; margin: 4px 0 10px; }
+.dh-final .mvp { font-size: 20px; color: var(--muted); margin: 4px 0; } .dh-final .mvp b { color: var(--text); }
+.dh-tab { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 18px; }
+.dh-tab th { color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); }
+.dh-tab td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #2b333b; }
+.dh-chk { font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 6px; margin: 0 8px 0 0; }
+.dh-chk input { width: auto; margin: 0; display: inline; }
+.h-timer.hot { color: var(--red); animation: pulse .5s infinite alternate; }
+
+/* Membran-Duell: Teilnehmende sehen die Arena */
+.d-arena { flex: 1 1 58%; min-height: 0; position: relative; margin: 6px 10px 0; border-radius: 12px; background: radial-gradient(ellipse at 50% 40%, #222a33, #14181d 70%); border: 1px solid var(--line); }
+.d-arena canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.d-wrap .d-main { flex: 0 0 auto; flex-direction: row; gap: 24px; padding: 8px 16px 26px; }
+.d-wrap .d-pump { width: min(30vh, 40vw); height: min(30vh, 40vw); }
+.d-side { display: flex; flex-direction: column; gap: 8px; max-width: 460px; }
+.d-side .d-combo { height: 46px; font-size: 38px; }
+.d-side .d-help { text-align: left; }
+
+/* Membran-Duell: animierte Kurzanleitung */
+.ovc.wide { max-width: 980px; }
+.howto { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; text-align: center; }
+.hw-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 4px; }
+.hw-card svg { width: 100%; max-width: 150px; margin: 0 auto; display: block; overflow: visible; }
+.hw-card b { font-size: 16px; color: var(--team, var(--text)); } .hw-card span { font-size: 13px; color: var(--muted); }
+.hw-card em { font-style: normal; color: var(--text); font-weight: 700; } .hw-card em.g { color: var(--green); }
+.hw-grip, .hw-band { fill: var(--team, #2f8fff); }
+.ovc[data-team="0"] { --team: var(--blue); } .ovc[data-team="1"] { --team: var(--orange); }
+.hw-key { fill: #e8edf1; stroke: #59636b; stroke-width: 2; animation: hwkey 1.2s infinite; transform-box: fill-box; }
+.hw-kt { font: 800 8px system-ui, sans-serif; fill: #14181d; text-anchor: middle; animation: hwkey 1.2s infinite; }
+@keyframes hwkey { 0%, 8% { transform: translateY(0); } 12%, 22% { transform: translateY(3px); } 30%, 100% { transform: translateY(0); } }
+.hw-p1 .hw-h { animation: hwpump 1.2s infinite; }
+@keyframes hwpump { 0%, 10% { transform: translateY(0); } 16% { transform: translateY(26px); } 70%, 100% { transform: translateY(0); } }
+.hw-ring0 { fill: none; stroke: #3a444e; stroke-width: 6; }
+.hw-ring { fill: none; stroke-width: 6; stroke-dasharray: 314; transform: rotate(-90deg); transform-origin: 60px 58px; animation: hwring 1.6s infinite; }
+@keyframes hwring { 0% { stroke-dashoffset: 314; stroke: #f5c211; } 60% { stroke-dashoffset: 0; stroke: #f5c211; } 62%, 74% { stroke-dashoffset: 0; stroke: #2ecc71; } 76%, 100% { stroke-dashoffset: 314; stroke: #f5c211; } }
+.hw-p2 .hw-h { animation: hwpump2 1.6s infinite; }
+@keyframes hwpump2 { 0%, 64% { transform: translateY(0); } 70% { transform: translateY(26px); } 100% { transform: translateY(0); } }
+.hw-p3 .hw-h { animation: hwpump 1.2s infinite; }
+.hw-combo { font: 900 15px system-ui, sans-serif; fill: #fff35c; stroke: #0d1014; stroke-width: 3; paint-order: stroke; text-anchor: middle; transform-origin: 60px 36px; animation: hwcombo 1.2s infinite; }
+@keyframes hwcombo { 0%, 12% { opacity: 0; transform: scale(.4); } 20% { opacity: 1; transform: scale(1.25); } 55% { opacity: 1; transform: scale(1); } 75%, 100% { opacity: 0; transform: scale(1) translateY(-8px); } }
+.hw-flash { fill: #fff; opacity: 0; animation: hwflash 3s infinite; pointer-events: none; }
+@keyframes hwflash { 0%, 69% { opacity: 0; } 71% { opacity: .85; } 80%, 100% { opacity: 0; } }
+@media (max-width: 760px) { .howto { grid-template-columns: repeat(2, 1fr); } }

@@ -1,5 +1,6 @@
 // Unter Druck – Einstieg: entscheidet, welche Ansicht gezeigt wird.
-//   …/?host            → Moderator/Beamer
+//   …/?host            → Moderator/Beamer „Unter Druck“
+//   …/?host=duell      → Moderator/Beamer „Membran-Duell“
 //   …/?room=ABCD       → Teilnehmende
 //   …/                 → Startbildschirm
 import { connect } from './net.js';
@@ -18,7 +19,7 @@ function startScreen(msg = '') {
         <label>Raumcode<input id="code" maxlength="4" autocomplete="off" placeholder="ABCD" autofocus></label>
         <button class="btn big">Mitspielen</button>
       </form>
-      <p class="small"><a href="?host">Ich leite das Spiel (Moderator)</a></p>
+      <p class="small">Spiel leiten: <a href="?host">Unter Druck</a> · <a href="?host=duell">Membran-Duell</a></p>
     </div></div>`;
   app.querySelector('#f').onsubmit = (e) => {
     e.preventDefault();
@@ -41,8 +42,13 @@ async function boot() {
     b.textContent = 'Demo-Modus ohne Firebase – funktioniert nur zwischen Tabs dieses Browsers';
     document.body.appendChild(b);
   }
-  if (q.has('host')) (await import('./host.js')).startHost(db, app);
-  else (await import('./player.js')).startPlayer(db, room, app, startScreen);
+  if (q.get('host') === 'duell') (await import('./duell-host.js')).startDuellHost(db, app);
+  else if (q.has('host')) (await import('./host.js')).startHost(db, app);
+  else {
+    const game = await db.get(`rooms/${room}/meta/game`).catch(() => null);
+    if (game === 'duell') (await import('./duell-player.js')).startDuellPlayer(db, room, app, startScreen);
+    else (await import('./player.js')).startPlayer(db, room, app, startScreen);
+  }
 }
 
 boot();

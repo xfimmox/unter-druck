@@ -10,6 +10,7 @@
 //   db.on(path, cb)                – auf Aenderungen hoeren, liefert Abmelde-Funktion
 //   db.onDisconnect(path, value)   – Wert, der beim Verbindungsabbruch gesetzt wird
 //   db.onConnected(cb)             – cb(true/false) bei Verbindungswechsel
+//   db.serverNow()                 – Uhrzeit des Servers in ms (fuer gemeinsamen Takt)
 
 const FB_VERSION = '10.12.2';
 
@@ -29,6 +30,8 @@ async function firebaseBackend(cfg) {
   const cred = await authM.signInAnonymously(authM.getAuth(app));
   const d = m.getDatabase(app);
   const R = (p) => m.ref(d, p);
+  let off = 0; // Abstand lokale Uhr -> Firebase-Serveruhr (ms)
+  m.onValue(m.ref(d, '.info/serverTimeOffset'), (x) => { off = x.val() || 0; });
   const warn = (what) => (e) => console.warn(`Firebase (${what}):`, e.message || e);
   return {
     uid: cred.user.uid,
@@ -39,6 +42,7 @@ async function firebaseBackend(cfg) {
     on: (p, cb) => m.onValue(R(p), (s) => cb(s.val()), warn('lesen ' + p)),
     onDisconnect: (p, v) => m.onDisconnect(R(p)).set(v).catch(warn('onDisconnect ' + p)),
     onConnected: (cb) => m.onValue(R('.info/connected'), (s) => cb(!!s.val())),
+    serverNow: () => Date.now() + off,
   };
 }
 
@@ -116,5 +120,6 @@ function demoBackend() {
     },
     onDisconnect: async (p, v) => { disc.push([p, v]); },
     onConnected: (cb) => { queueMicrotask(() => cb(true)); },
+    serverNow: () => Date.now(),
   };
 }
