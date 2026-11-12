@@ -23,7 +23,7 @@ export async function startHost(db, app) {
   }
   const base = `rooms/${code}`;
   const fresh = () => ({ ph: 'lobby', rd: 0, seed: Math.floor(Math.random() * 1e6) + 1, tl: 0, pz: false, roster: {}, order: [[], []], scores: [null, null, null, null], T: null, sched: [], ticker: [], rid: 0, green: {}, bots: {} });
-  if (!G || !G.ph) G = fresh();
+  if (!G || !G.ph || G.ph === 'lobby' || G.ph === 'final') G = fresh(); // nur laufende Spiele wieder aufnehmen
 
   let players = {}, valves = {};
   const offSince = {}, msgs = {}, botSt = {};
@@ -41,7 +41,7 @@ export async function startHost(db, app) {
     </header>
     <main class="h-main" id="hMain"></main>
     <footer class="h-ctl">
-      <span class="h-warn">⚠ Diesen Tab im Vordergrund lassen – hier läuft die Anlage.</span>
+      <span class="h-warn">⚠ Diesen Tab im Vordergrund lassen – hier läuft die Anlage. <small>Version ${window.UD_VERSION || '?'}</small></span>
       <button class="btn ghost" id="cBots" title="Testmodus">+5 Bots</button>
       <button class="btn ghost" id="cSnd"></button>
       <button class="btn ghost" id="cReset">Zurücksetzen</button>

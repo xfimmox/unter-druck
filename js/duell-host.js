@@ -25,7 +25,7 @@ export async function startDuellHost(db, app) {
   }
   const base = `rooms/${code}`;
   const fresh = () => ({ ph: 'lobby', rd: 0, played: 0, wins: [0, 0], seed: Math.floor(Math.random() * 1e6) + 1, roster: {}, order: [[], []], bots: {}, evOn: true, results: [], pz: false, rw: null, kings: {} });
-  if (!G || !G.ph) G = fresh();
+  if (!G || !G.ph || G.ph === 'lobby' || G.ph === 'final') G = fresh(); // nur laufende Spiele wieder aufnehmen
   if (['count', 'run', 'burst'].includes(G.ph)) { G.ph = G.played ? 'result' : 'teams'; G.rw = null; } // nach Neuladen: Runde neu starten
 
   let players = {}, R = null, t0 = 0, tl = 0, evk = 0, lastEv = null, countEnd = 0, countN = null;
@@ -44,7 +44,7 @@ export async function startDuellHost(db, app) {
     </header>
     <main class="h-main dh-main"><canvas id="cv"></canvas><div class="dh-layer" id="hLayer"></div></main>
     <footer class="h-ctl">
-      <span class="h-warn">⚠ Diesen Tab im Vordergrund lassen – hier läuft das Duell.</span>
+      <span class="h-warn">⚠ Diesen Tab im Vordergrund lassen – hier läuft das Duell. <small>Version ${window.UD_VERSION || '?'}</small></span>
       <label class="dh-chk"><input type="checkbox" id="cEv"> Ereignisse</label>
       <button class="btn ghost" id="cBots">+5 Bots</button>
       <button class="btn ghost" id="cSnd"></button>
